@@ -1,107 +1,135 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState, useMemo, useEffect} from 'react';
+
+import Root from './src/components/Root';
+import {StatusBar, View} from 'react-native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Provider as PaperProvider} from 'react-native-paper';
+import mainContext from './src/context/mainContext';
+import Toast from 'react-native-toast-message';
+import 'react-native-gesture-handler';
 
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+  LoginScreen,
+  RegisterScreen,
+  ForgotPasswordScreen,
+  HomeScreen,
+} from './src/screens';
+
+import theme from './src/customTheme';
+
+import auth from '@react-native-firebase/auth';
+
+import Client from './src/services/apollo/Client';
+import {ApolloProvider} from '@apollo/client';
 
 import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  doLogin,
+  doSignup,
+  doLogout,
+  doReset,
+} from './src/services/loginServices';
 
-function Section({children, title}) {
-  const isDarkMode = useColorScheme() === 'dark';
+import {
+  googleLogin,
+  facebookLogin,
+  appleLogin,
+} from './src/services/loginSocialMedia';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  const [userProfile, setUserProfile] = useState(null);
+  const [userID, setUserID] = useState(null);
+
+  const [initializing, setInitializing] = useState(true);
+
+  function onAuthStateChanged(user) {
+    setUserProfile(user);
+    if (initializing) {
+      setInitializing(false);
+    }
+  }
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  const mainC = useMemo(
+    () => ({
+      userProfile: {userProfile},
+      signOutUser: () => doLogout(),
+      userID: {userID},
+      setUserID: value => setUserID(value),
+      handleLogin: (email, password) => {
+        doLogin(email, password);
+      },
+      handleSignup: (email, password) => {
+        doSignup(email, password);
+      },
+      handleResetPassword: email => {
+        doReset(email);
+      },
+      handleGLogin: () => googleLogin(),
+      handleFBLogin: () => facebookLogin(),
+      handleALogin: () => appleLogin(),
+    }),
+    [userProfile, userID],
+  );
+
+  const navTheme = DefaultTheme;
+  navTheme.colors.background = '#D1EFA7';
+
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <ApolloProvider client={Client}>
+      <mainContext.Provider value={mainC}>
+        <NavigationContainer theme={navTheme}>
+          <PaperProvider theme={theme}>
+            <View style={{height: 28}}>
+              <StatusBar translucent backgroundColor="#000" />
+            </View>
+            <Stack.Navigator
+              initialRouteName="Login"
+              options={{headerShown: false}}>
+              {userProfile ? (
+                <>
+                  <Stack.Screen
+                    name="Root"
+                    component={Root}
+                    options={{headerShown: false}}
+                  />
+                  <Stack.Screen
+                    name="Home"
+                    component={HomeScreen}
+                    options={{headerShown: false}}
+                  />
+                </>
+              ) : (
+                <>
+                  <Stack.Screen
+                    name="Login"
+                    component={LoginScreen}
+                    options={{headerShown: false}}
+                  />
+                  <Stack.Screen
+                    name="ForgotPassword"
+                    component={ForgotPasswordScreen}
+                    options={{headerShown: false}}
+                  />
+                  <Stack.Screen
+                    name="NewUser"
+                    component={RegisterScreen}
+                    options={{headerShown: false}}
+                  />
+                </>
+              )}
+            </Stack.Navigator>
+            <Toast />
+          </PaperProvider>
+        </NavigationContainer>
+      </mainContext.Provider>
+    </ApolloProvider>
   );
 }
-
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
