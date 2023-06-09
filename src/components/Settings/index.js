@@ -12,9 +12,9 @@ const Settings = () => {
   const { t, i18n } = useTranslation();
   const [lang, changeLang] = useState("es");
 
-  // useEffect(() => {
-  //   lang && i18n.changeLanguage(lang);
-  // }, [lang]);
+  useEffect(() => {
+    lang && i18n.changeLanguage(lang);
+  }, [lang]);
 
   return (
     <View style={{ marginBottom: 12 }}>
