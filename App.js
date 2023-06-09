@@ -1,4 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
+// PRUEBA
 import React, {useState, useMemo, useEffect} from 'react';
 
 import Root from './src/components/Root';
