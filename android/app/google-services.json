@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "759530795975",
+    "project_id": "queteregalo-ec23b",
+    "storage_bucket": "queteregalo-ec23b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759530795975:android:f81a65992b533d03a39fe2",
+        "android_client_info": {
+          "package_name": "com.nidit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759530795975-dt1nqpm5vlsgcnrju5vvfauelq4lldb4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nidit",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "759530795975-7jm547qf7fk5o16kc7aoua3vi1udinub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhiFSxENXCvNMRhkGbizAaLzdy_g6YqAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759530795975-7jm547qf7fk5o16kc7aoua3vi1udinub.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "759530795975-9s7hfn1e8q5ehmg3qtlodrdkp7607al0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "nidit.net.que-te-regalo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759530795975:android:2f41f0b92504ab4ea39fe2",
+        "android_client_info": {
+          "package_name": "net.nidit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759530795975-nf77ffmqui7af3t9jkpn0onokgfr855d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.nidit",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "759530795975-7jm547qf7fk5o16kc7aoua3vi1udinub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhiFSxENXCvNMRhkGbizAaLzdy_g6YqAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759530795975-7jm547qf7fk5o16kc7aoua3vi1udinub.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "759530795975-9s7hfn1e8q5ehmg3qtlodrdkp7607al0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "nidit.net.que-te-regalo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
