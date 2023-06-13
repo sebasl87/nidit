@@ -34,7 +34,7 @@ import {
 
 import {
   googleLogin,
-  facebookLogin,
+  // facebookLogin,
   appleLogin,
 } from './src/services/loginSocialMedia';
 
@@ -73,7 +73,7 @@ export default function App() {
         doReset(email);
       },
       handleGLogin: () => googleLogin(),
-      handleFBLogin: () => facebookLogin(),
+      // handleFBLogin: () => facebookLogin(),
       handleALogin: () => appleLogin(),
     }),
     [userProfile, userID],

@@ -88,7 +88,7 @@ function LoginScreen({ navigation }) {
                   )}
                 />
               )}
-              <SocialMediaButton
+              {/* <SocialMediaButton
                 text={t("login:infacebook")}
                 handleCreateAccount={() => handleFBLogin()}
                 icono={() => (
@@ -97,7 +97,7 @@ function LoginScreen({ navigation }) {
                     style={{ width: 30, height: 30 }}
                   />
                 )}
-              />
+              /> */}
               <SocialMediaButton
                 text={t("login:ingoogle")}
                 handleCreateAccount={() => handleGLogin()}

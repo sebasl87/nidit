@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">nidit</string>
+    <string name="facebook_app_id">795083019009221</string><string name="facebook_client_token">2c2c7098c34c9a0ccc2455cd34795a5b</string>
 </resources>
