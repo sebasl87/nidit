@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useMemo, useEffect} from 'react';
 
+import auth from '@react-native-firebase/auth';
 import Root from './src/components/Root';
 import {StatusBar, View} from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
@@ -11,6 +12,7 @@ import Toast from 'react-native-toast-message';
 import 'react-native-gesture-handler';
 import "./src/localization/i18n"; 
 
+
 import {
   LoginScreen,
   RegisterScreen,
@@ -20,7 +22,6 @@ import {
 
 import theme from './src/customTheme';
 
-import auth from '@react-native-firebase/auth';
 
 import Client from './src/services/apollo/Client';
 import {ApolloProvider} from '@apollo/client';
@@ -34,7 +35,7 @@ import {
 
 import {
   googleLogin,
-  facebookLogin,
+  // facebookLogin,
   appleLogin,
 } from './src/services/loginSocialMedia';
 
@@ -73,7 +74,7 @@ export default function App() {
         doReset(email);
       },
       handleGLogin: () => googleLogin(),
-      handleFBLogin: () => facebookLogin(),
+      // handleFBLogin: () => facebookLogin(),
       handleALogin: () => appleLogin(),
     }),
     [userProfile, userID],

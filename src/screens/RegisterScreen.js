@@ -89,7 +89,7 @@ function RegisterScreen({ navigation }) {
                   />
                 )}
               />
-              <SocialMediaButton
+              {/* <SocialMediaButton
                 text={t("register:regfacebook")}
                 handleCreateAccount={() => handleFBLogin()}
                 icono={() => (
@@ -98,7 +98,7 @@ function RegisterScreen({ navigation }) {
                     style={{ width: 30, height: 30 }}
                   />
                 )}
-              />
+              /> */}
               <SocialMediaButton
                 text={t("register:reggoogle")}
                 handleCreateAccount={() => handleGLogin()}
