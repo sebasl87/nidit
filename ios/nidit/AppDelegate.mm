@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
-#import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
+// #import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -10,8 +10,8 @@
 {
   [FIRApp configure];
   
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-                      didFinishLaunchingWithOptions:launchOptions];
+  // [[FBSDKApplicationDelegate sharedInstance] application:application
+  //                     didFinishLaunchingWithOptions:launchOptions];
   
   self.moduleName = @"nidit";
   // You can add your custom initial props in the dictionary below.
