@@ -81,7 +81,7 @@ export default function App() {
       <mainContext.Provider value={mainC}>
         <NavigationContainer theme={navTheme}>
           <PaperProvider theme={theme}>
-            <View style={{height: 28}}>
+            <View style={{height: 28, backgroundColor:"#D1EFA7"}}>
               <StatusBar translucent backgroundColor="#000" />
             </View>
             <Stack.Navigator

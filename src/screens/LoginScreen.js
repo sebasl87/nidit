@@ -26,10 +26,10 @@ function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={["#FFD194", "#70E1F5"]}
+        colors={["#FFD194", "#D1EFA7"]}
         style={styles.background}
         start={{ x: 0, y: 1 }}
-        end={{ x: 0.75, y: 1 }}
+        end={{ x: 0, y: 0.85 }}
       >
         <ScrollView
           contentContainerStyle={{
