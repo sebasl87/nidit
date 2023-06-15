@@ -12,7 +12,6 @@ import Toast from 'react-native-toast-message';
 import 'react-native-gesture-handler';
 import "./src/localization/i18n"; 
 
-
 import {
   LoginScreen,
   RegisterScreen,
@@ -21,7 +20,6 @@ import {
 } from './src/screens';
 
 import theme from './src/customTheme';
-
 
 import Client from './src/services/apollo/Client';
 import {ApolloProvider} from '@apollo/client';
@@ -101,11 +99,11 @@ export default function App() {
                     component={Root}
                     options={{headerShown: false}}
                   />
-                  <Stack.Screen
+                  {/* <Stack.Screen
                     name="Home"
                     component={HomeScreen}
                     options={{headerShown: false}}
-                  />
+                  /> */}
                 </>
               ) : (
                 <>

@@ -10,7 +10,7 @@ function MenuTop() {
   const nav = useNavigation();
   const drawerStatus = useDrawerStatus();
   const open = drawerStatus === "open";
-
+console.log(drawerStatus)
   return (
     <>
       <View style={styles.menuTop.divMaster}>
@@ -20,7 +20,7 @@ function MenuTop() {
               <Hamburger
                 type="spinCross"
                 active={open}
-                onPress={() => (open ? nav.closeDrawer() : nav.openDrawer())}
+                onPress={() => nav.toggleDrawer()}
                 underlayColor="transparent"
                 color="black"
               ></Hamburger>

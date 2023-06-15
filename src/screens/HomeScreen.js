@@ -193,7 +193,7 @@ function HomeScreen({ visible }) {
         </View>
       </ScrollView>
       <AnimatedFAB
-        // icon={"plus"}
+        icon={"plus"}
         label={t("home:new")}
         extended={isExtended}
         onPress={() => setOpenModalNewWish(true)}
