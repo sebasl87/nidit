@@ -10,14 +10,9 @@ import {Provider as PaperProvider} from 'react-native-paper';
 import mainContext from './src/context/mainContext';
 import Toast from 'react-native-toast-message';
 import 'react-native-gesture-handler';
-import "./src/localization/i18n"; 
+import './src/localization/i18n';
 
-import {
-  LoginScreen,
-  RegisterScreen,
-  ForgotPasswordScreen,
-  HomeScreen,
-} from './src/screens';
+import {LoginScreen, RegisterScreen, ForgotPasswordScreen} from './src/screens';
 
 import theme from './src/customTheme';
 
@@ -93,18 +88,11 @@ export default function App() {
               initialRouteName="Login"
               options={{headerShown: false}}>
               {userProfile ? (
-                <>
-                  <Stack.Screen
-                    name="Root"
-                    component={Root}
-                    options={{headerShown: false}}
-                  />
-                  {/* <Stack.Screen
-                    name="Home"
-                    component={HomeScreen}
-                    options={{headerShown: false}}
-                  /> */}
-                </>
+                <Stack.Screen
+                  name="Root"
+                  component={Root}
+                  options={{headerShown: false}}
+                />
               ) : (
                 <>
                   <Stack.Screen
