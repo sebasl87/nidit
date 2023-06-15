@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-// import Ionicons from "@expo/vector-icons/Ionicons";
+
 import {
   DrawerContentScrollView,
   DrawerItem,
@@ -9,6 +9,7 @@ import {
 import UserImage from './UserImage';
 import {styles} from '../styles/styles';
 import {useTranslation} from 'react-i18next';
+import { TextInput } from 'react-native-paper';
 
 const CustomDrawerHead = props => {
   const {t} = useTranslation();
@@ -30,7 +31,12 @@ const CustomDrawerHead = props => {
         <DrawerItemList {...props} />
         <DrawerItem
           label={t('home:menu.logout')}
-          // icon={() => <Ionicons name="exit-outline" size={18} color="#000" />}
+           icon={() =>(
+            <TextInput.Icon
+              icon="gift-off"
+              iconColor="#F49037"
+            />
+          )}
           onPress={() => {
             props.logout();
           }}

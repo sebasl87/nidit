@@ -30,16 +30,16 @@ function LoginWithUser({
         onChangeText={handleOnChangeTextPass}
         theme={{roundness: 8}}
         secureTextEntry={hidePass}
-        // right={
-        //   <TextInput.Icon
-        //     icon={hidePass ? 'eye' : 'eye-off'}
-        //     onPress={() => {
-        //       setHidePass(!hidePass);
-        //     }}
-        //     style={{paddingTop: 6}}
-        //     iconColor="rgba(0, 0, 0, 0.3)"
-        //   />
-        // }
+        right={
+          <TextInput.Icon
+            icon={hidePass ? 'eye' : 'eye-off'}
+            onPress={() => {
+              setHidePass(!hidePass);
+            }}
+            style={{paddingTop: 6}}
+            iconColor="rgba(0, 0, 0, 0.3)"
+          />
+        }
       />
       <View style={{marginTop: 8, marginBottom: 8}}>
         <Button

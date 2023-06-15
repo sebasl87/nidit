@@ -9,7 +9,6 @@ import Hamburger from "./Hamburger";
 function MenuTop() {
   const nav = useNavigation();
   const drawerStatus = useDrawerStatus();
-  const open = drawerStatus === "open";
 
   return (
     <>
@@ -19,8 +18,8 @@ function MenuTop() {
             <View style={{ marginTop: 10 }}>
               <Hamburger
                 type="spinCross"
-                active={open}
-                onPress={() => (open ? nav.closeDrawer() : nav.openDrawer())}
+                active={drawerStatus === "open"}
+                onPress={() => nav.toggleDrawer()}
                 underlayColor="transparent"
                 color="black"
               ></Hamburger>

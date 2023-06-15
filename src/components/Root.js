@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-// import Ionicons from "@expo/vector-icons/Ionicons";
+
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import mainContext from '../context/mainContext';
@@ -8,6 +8,7 @@ import auth from '@react-native-firebase/auth';
 
 import {HomeScreen} from '../screens';
 import Settings from './Settings';
+import { TextInput} from 'react-native-paper';
 
 function Root() {
   const Drawer = createDrawerNavigator();
@@ -37,11 +38,16 @@ function Root() {
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
-        // options={{
-        //   drawerIcon: () => {
-        //     // return <Ionicons name="home-outline" size={18} color="#F49037" />;
-        //   },
-        // }}
+        options={{
+          drawerIcon: () => {
+            return (
+              <TextInput.Icon
+                icon="gift-open-outline"
+                iconColor="#F49037"
+              />
+            );
+          },
+        }}
       />
     </Drawer.Navigator>
   );
