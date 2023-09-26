@@ -7,6 +7,7 @@ function ResetPassword({ handleOnChangeTextEmail, handleOnPress, textButton }) {
   return (
     <>
       <TextInput
+        autoCapitalize="none"
         label="Email"
         mode="outlined"
         style={{ ...styles.resetPassword.inputText, marginTop: 0 }}

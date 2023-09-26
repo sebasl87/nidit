@@ -17,6 +17,7 @@ function LoginWithUser({
   return (
     <>
       <TextInput
+        autoCapitalize="none"
         label={t('login:username')}
         mode="outlined"
         style={{...styles.loginWithUser.inputText, marginTop: 0}}
@@ -24,6 +25,7 @@ function LoginWithUser({
         theme={{roundness: 8}}
       />
       <TextInput
+        autoCapitalize="none"
         label={t('login:password')}
         mode="outlined"
         style={styles.loginWithUser.inputText}
