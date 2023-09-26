@@ -1,85 +1,72 @@
-import React, { useState, useContext } from "react";
-import {
-  Image,
-  Text,
-  View,
-  ScrollView,
-  TouchableHighlight,
-} from "react-native";
+import React, {useState, useContext} from 'react';
+import {Image, Text, View, ScrollView, TouchableHighlight} from 'react-native';
 
-import {
-  LoginWithUser,
-  DividerWithText,
-  SocialMediaButton,
-} from "../components";
+import {LoginWithUser, DividerWithText, SocialMediaButton} from '../components';
 
-import mainContext from "../context/mainContext";
-import { styles } from "../styles/styles";
-import { useTranslation } from "react-i18next";
+import mainContext from '../context/mainContext';
+import {styles} from '../styles/styles';
+import {useTranslation} from 'react-i18next';
 
-function RegisterScreen({ navigation }) {
-  const { handleALogin, handleGLogin, handleSignup } =
-    useContext(mainContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { t } = useTranslation();
+function RegisterScreen({navigation}) {
+  const {handleALogin, handleGLogin, handleSignup} = useContext(mainContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const {t} = useTranslation();
 
   return (
     <View style={styles.container}>
-        <ScrollView
-          contentContainerStyle={{
-            flex: 1,
-            width: "100%",
-            height: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <View style={styles.login}>
-            <View style={styles.logoAndBack}>
-              <View style={styles.back}>
-                <TouchableHighlight
-                  onPress={() => navigation.navigate("Login")}
-                  activeOpacity={1}
-                  underlayColor="transparent"
-                >
-                    <Image
-                      source={require("../../assets/back.png")}
-                      style={styles.backButton}
-                    />
-                </TouchableHighlight>
-              </View>
-              <View style={styles.logoWithBack}>
+      <ScrollView
+        contentContainerStyle={{
+          flex: 1,
+          width: '100%',
+          height: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <View style={styles.login}>
+          <View style={styles.logoAndBack}>
+            <View style={styles.back}>
+              <TouchableHighlight
+                onPress={() => navigation.navigate('Login')}
+                activeOpacity={1}
+                underlayColor="transparent">
                 <Image
-                  source={require("../../assets/nidit-logo.png")}
-                  style={styles.logoPicture}
+                  source={require('../../assets/back.png')}
+                  style={styles.backButton}
                 />
-              </View>
+              </TouchableHighlight>
             </View>
-            <View style={{ top: -10 }}>
-              <Text style={styles.registerTextHight}>
-                {t("register:welcome")}
-              </Text>
-            </View>
-            <LoginWithUser
-              handleOnChangeTextPass={(text) => setPassword(text)}
-              handleOnChangeTextEmail={(text) => setEmail(text)}
-              handleOnPress={() => handleSignup(email, password)}
-              textButton={t("register:register")}
-            />
-            <DividerWithText text={t("register:or")} />
-            <View style={{ marginTop: 8, marginBottom: 24 }}>
-              <SocialMediaButton
-                text={t("register:regapple")}
-                handleCreateAccount={() => handleALogin()}
-                icono={() => (
-                  <Image
-                    source={require("../../assets/appleI.png")}
-                    style={{ width: 30, height: 30 }}
-                  />
-                )}
+            <View style={styles.logoWithBack}>
+              <Image
+                source={require('../../assets/nidit-logo.png')}
+                style={styles.logoPicture}
               />
-              {/* <SocialMediaButton
+            </View>
+          </View>
+          <View style={{top: -10}}>
+            <Text style={styles.registerTextHight}>
+              {t('register:welcome')}
+            </Text>
+          </View>
+          <LoginWithUser
+            handleOnChangeTextPass={text => setPassword(text)}
+            handleOnChangeTextEmail={text => setEmail(text)}
+            handleOnPress={() => handleSignup(email, password)}
+            textButton={t('register:register')}
+          />
+          <DividerWithText text={t('register:or')} />
+          <View style={{marginTop: 8, marginBottom: 24}}>
+            <SocialMediaButton
+              text={t('register:regapple')}
+              handleCreateAccount={() => handleALogin()}
+              icono={() => (
+                <Image
+                  source={require('../../assets/appleI.png')}
+                  style={{width: 30, height: 30}}
+                />
+              )}
+            />
+            {/* <SocialMediaButton
                 text={t("register:regfacebook")}
                 handleCreateAccount={() => handleFBLogin()}
                 icono={() => (
@@ -89,19 +76,19 @@ function RegisterScreen({ navigation }) {
                   />
                 )}
               /> */}
-              <SocialMediaButton
-                text={t("register:reggoogle")}
-                handleCreateAccount={() => handleGLogin()}
-                icono={() => (
-                  <Image
-                    source={require("../../assets/googleI.png")}
-                    style={{ width: 30, height: 30 }}
-                  />
-                )}
-              />
-            </View>
+            <SocialMediaButton
+              text={t('register:reggoogle')}
+              handleCreateAccount={() => handleGLogin()}
+              icono={() => (
+                <Image
+                  source={require('../../assets/googleI.png')}
+                  style={{width: 30, height: 30}}
+                />
+              )}
+            />
           </View>
-        </ScrollView>
+        </View>
+      </ScrollView>
     </View>
   );
 }

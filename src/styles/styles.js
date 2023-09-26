@@ -133,7 +133,8 @@ export const styles = StyleSheet.create({
       height: 56,
       marginTop: 12,
       borderRadius: 16,
-      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+      backgroundColor: 'rgba(255, 255, 255, 0.8)',
+      
     },
   },
   dividerWidthText: {

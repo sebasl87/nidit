@@ -112,7 +112,7 @@ function RowCard({ wishName, disabled, id, onRemove, onCheck, onEdit }) {
                   styles.rowCard.dialogFirstButton,
                 ]}
               >
-                {t("home:newWish.cancelar")}
+                {t("home:newWish.cancel")}
               </Button>
               <Button
                 buttonColor="rgba(245, 176, 66, 1)"
