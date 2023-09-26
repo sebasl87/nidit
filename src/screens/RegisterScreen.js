@@ -7,7 +7,6 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-import LinearGradient from "react-native-linear-gradient";
 import {
   LoginWithUser,
   DividerWithText,
@@ -19,7 +18,7 @@ import { styles } from "../styles/styles";
 import { useTranslation } from "react-i18next";
 
 function RegisterScreen({ navigation }) {
-  const { handleALogin, handleGLogin, handleSignup, handleFBLogin } =
+  const { handleALogin, handleGLogin, handleSignup } =
     useContext(mainContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,12 +26,6 @@ function RegisterScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={["#FFD194", "#70E1F5"]}
-        style={styles.background}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 0.75, y: 1 }}
-      >
         <ScrollView
           contentContainerStyle={{
             flex: 1,
@@ -47,16 +40,13 @@ function RegisterScreen({ navigation }) {
               <View style={styles.back}>
                 <TouchableHighlight
                   onPress={() => navigation.navigate("Login")}
-                  hitSlop={{ top: 20, bottom: 20, left: 60, right: 60 }}
                   activeOpacity={1}
                   underlayColor="transparent"
                 >
-                  <View>
                     <Image
                       source={require("../../assets/back.png")}
                       style={styles.backButton}
                     />
-                  </View>
                 </TouchableHighlight>
               </View>
               <View style={styles.logoWithBack}>
@@ -112,7 +102,6 @@ function RegisterScreen({ navigation }) {
             </View>
           </View>
         </ScrollView>
-      </LinearGradient>
     </View>
   );
 }

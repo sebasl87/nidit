@@ -20,7 +20,6 @@ import { SUBSCRIPTION_WISHLIST_WITH_ID } from "../services/apollo/querys/wish";
 import Toast from 'react-native-toast-message';
 import { useTranslation } from "react-i18next";
 
-
 function HomeScreen({ visible }) {
   const { t } = useTranslation();
 

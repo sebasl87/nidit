@@ -7,7 +7,6 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-import LinearGradient from "react-native-linear-gradient";
 import { ResetPassword } from "../components";
 import mainContext from "../context/mainContext";
 import { styles } from "../styles/styles";
@@ -21,12 +20,6 @@ function ForgotPasswordScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={["#FFD194", "#70E1F5"]}
-        style={styles.background}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 0.75, y: 1 }}
-      >
         <ScrollView
           contentContainerStyle={{
             flex: 1,
@@ -45,12 +38,10 @@ function ForgotPasswordScreen({ navigation }) {
                   activeOpacity={1}
                   underlayColor="transparent"
                 >
-                  <View>
                     <Image
                       source={require("../../assets/back.png")}
                       style={styles.backButton}
                     />
-                  </View>
                 </TouchableHighlight>
               </View>
               <View style={styles.logoWithBack}>
@@ -73,7 +64,6 @@ function ForgotPasswordScreen({ navigation }) {
             />
           </View>
         </ScrollView>
-      </LinearGradient>
     </View>
   );
 }

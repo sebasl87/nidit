@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Image, Text, View, ScrollView, Platform } from "react-native";
 
-import LinearGradient from "react-native-linear-gradient";
 import {
   LoginWithUser,
   DividerWithText,
@@ -16,7 +15,7 @@ import mainContext from "../context/mainContext";
 import { useTranslation } from "react-i18next";
 
 function LoginScreen({ navigation }) {
-  const { handleALogin, handleGLogin, handleLogin, handleFBLogin } =
+  const { handleALogin, handleGLogin, handleLogin } =
     useContext(mainContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,12 +24,6 @@ function LoginScreen({ navigation }) {
   const notDisabled = email.length > 0 && password.length > 0;
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={["#FFD194", "#D1EFA7"]}
-        style={styles.background}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 0, y: 0.85 }}
-      >
         <ScrollView
           contentContainerStyle={{
             flex: 1,
@@ -112,7 +105,7 @@ function LoginScreen({ navigation }) {
             <Settings />
           </View>
         </ScrollView>
-      </LinearGradient>
+
     </View>
   );
 }
