@@ -53,12 +53,12 @@ function ForgotPasswordScreen({ navigation }) {
             </View>
             <View style={{ top: -10 }}>
               <Text style={styles.registerTextHight}>
-                {t("fogotPass:repass")}
+                {t("forgotPass:repass")}
               </Text>
-              <Text style={styles.instructionsText}>{t("fogotPass:info")}</Text>
+              <Text style={styles.instructionsText}>{t("forgotPass:info")}</Text>
             </View>
             <ResetPassword
-              textButton={t("fogotPass:send")}
+              textButton={t("forgotPass:send")}
               handleOnPress={() => handleResetPassword(email)}
               handleOnChangeTextEmail={setEmail}
             />
