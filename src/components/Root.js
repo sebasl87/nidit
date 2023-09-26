@@ -8,7 +8,7 @@ import auth from '@react-native-firebase/auth';
 
 import {HomeScreen} from '../screens';
 import Settings from './Settings';
-import { TextInput} from 'react-native-paper';
+import {TextInput} from 'react-native-paper';
 
 function Root() {
   const Drawer = createDrawerNavigator();
@@ -41,10 +41,7 @@ function Root() {
         options={{
           drawerIcon: () => {
             return (
-              <TextInput.Icon
-                icon="gift-open-outline"
-                iconColor="#F49037"
-              />
+              <TextInput.Icon icon="gift-open-outline" iconColor="#F49037" backgroundColor="fff" />
             );
           },
         }}

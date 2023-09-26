@@ -36,7 +36,7 @@ function AddNewWish({
             multiline
             onChangeText={onChangeDescription}
             placeholder={t('home:newWish.descriptionInfo')}
-            style={{...styles.addNewWish.inputText, marginTop: 16, height:140}}
+            style={{...styles.addNewWish.inputText, marginTop: 16, height: 140}}
             theme={{roundness: 8}}
             defaultValue={formData?.description}
           />

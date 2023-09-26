@@ -35,6 +35,7 @@ const CustomDrawerHead = props => {
             <TextInput.Icon
               icon="gift-off"
               iconColor="#F49037"
+              backgroundColor="fff"
             />
           )}
           onPress={() => {

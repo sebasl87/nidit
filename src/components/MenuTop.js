@@ -1,10 +1,10 @@
-import React from "react";
-import { View, Image } from "react-native";
+import React from 'react';
+import {View, Image} from 'react-native';
 
-import { useNavigation } from "@react-navigation/native";
-import { useDrawerStatus } from "@react-navigation/drawer";
-import { styles } from "../styles/styles";
-import Hamburger from "./Hamburger";
+import {useNavigation} from '@react-navigation/native';
+import {useDrawerStatus} from '@react-navigation/drawer';
+import {styles} from '../styles/styles';
+import Hamburger from './Hamburger';
 
 function MenuTop() {
   const nav = useNavigation();
@@ -15,20 +15,19 @@ function MenuTop() {
       <View style={styles.menuTop.divMaster}>
         <View style={styles.menuTop.generalContainer}>
           <View style={styles.menuTop.menuContainer}>
-            <View style={{ marginTop: 10 }}>
+            <View style={{marginTop: 10}}>
               <Hamburger
                 type="spinCross"
-                active={drawerStatus === "open"}
+                active={drawerStatus === 'open'}
                 onPress={() => nav.toggleDrawer()}
                 underlayColor="transparent"
-                color="black"
-              ></Hamburger>
+                color="black"></Hamburger>
             </View>
           </View>
           <View style={styles.menuTop.logoContainer}>
             <Image
-              source={require("../../assets/IsoLogo.png")}
-              style={{ width: 180, height: 60 }}
+              source={require('../../assets/IsoLogo.png')}
+              style={{width: 180, height: 60}}
             />
           </View>
         </View>

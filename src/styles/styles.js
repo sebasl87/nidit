@@ -71,6 +71,7 @@ export const styles = StyleSheet.create({
       height: 36,
       borderRadius: 50,
       alignItems: 'center',
+      backgroundColor: 'fff',
     },
   },
   resetPassword: {
@@ -110,7 +111,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       height: 72,
       marginTop: 0,
-      backgroundColor: 'rgba(66, 254, 22, 0.15)',
+      backgroundColor: 'rgba(66, 254, 22, 0.05)',
       zIndex: 1,
     },
     generalContainer: {
@@ -134,7 +135,6 @@ export const styles = StyleSheet.create({
       marginTop: 12,
       borderRadius: 16,
       backgroundColor: 'rgba(255, 255, 255, 0.8)',
-      
     },
   },
   dividerWidthText: {

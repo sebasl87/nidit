@@ -40,6 +40,7 @@ function LoginWithUser({
             }}
             style={{paddingTop: 6}}
             iconColor="rgba(0, 0, 0, 0.3)"
+            backgroundColor="fff"
           />
         }
       />
