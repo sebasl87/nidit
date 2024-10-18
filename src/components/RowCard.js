@@ -56,7 +56,7 @@ function RowCard({ wishName, disabled, id, onRemove, onCheck, onEdit }) {
                   hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
                   style={styles.rowCard.plusIconView}
                   activeOpacity={0.6}
-                  underlayColor="rgba(245, 176, 66, 0.7)"
+                  underlayColor="transparent"
                 >
                   <Image
                     source={require("../../assets/tableIcon.png")}

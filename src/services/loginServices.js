@@ -4,9 +4,6 @@ import Toast from "react-native-toast-message";
 export const doSignup = async (email, password) => {
   auth()
     .createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      console.log(userCredential);
-    })
     .catch((error) => {
       console.log(error);
       Toast.show({
@@ -20,9 +17,6 @@ export const doSignup = async (email, password) => {
 export const doLogin = (email, password) => {
   auth()
     .signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      console.log(userCredential);
-    })
     .catch((error) => {
       Toast.show({
         type: "error",
@@ -36,9 +30,6 @@ export const doLogin = (email, password) => {
 export const doLogout = () => {
   auth()
     .signOut()
-    .then(() => {
-      console.log(null);
-    })
     .catch((error) => {
       console.log(error);
     });
