@@ -3,7 +3,12 @@ import React, {useContext, useEffect, useState} from 'react';
 import {MenuTop, NoItems, RowCard, AddNewWish} from '../components';
 
 import {View, ScrollView} from 'react-native';
-import {AnimatedFAB, Portal, Dialog} from 'react-native-paper';
+import {
+  AnimatedFAB,
+  Portal,
+  Dialog,
+  ActivityIndicator,
+} from 'react-native-paper';
 import mainContext from '../context/mainContext';
 import {styles} from '../styles/styles';
 import auth from '@react-native-firebase/auth';
@@ -64,9 +69,12 @@ function HomeScreen({visible}) {
     variables: {user_UID: uid},
   });
 
-  const {data: dataWishList} = useSubscription(SUBSCRIPTION_WISHLIST_WITH_ID, {
-    variables: {id: userID},
-  });
+  const {data: dataWishList, loading} = useSubscription(
+    SUBSCRIPTION_WISHLIST_WITH_ID,
+    {
+      variables: {id: userID},
+    },
+  );
 
   useEffect(() => {
     dataWishList && setWishList(dataWishList?.getWishlistUsers?.wishlist);
@@ -165,6 +173,7 @@ function HomeScreen({visible}) {
             paddingBottom: 84,
             flex: 1,
           }}>
+          {loading && <ActivityIndicator />}
           {isEmpty ? (
             <NoItems />
           ) : (
