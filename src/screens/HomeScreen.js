@@ -1,13 +1,13 @@
-/* eslint-disable */
 import React, {useContext, useEffect, useState} from 'react';
 import {MenuTop, NoItems, RowCard, AddNewWish} from '../components';
 
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, Share, Alert} from 'react-native';
 import {
   AnimatedFAB,
   Portal,
   Dialog,
   ActivityIndicator,
+  Button,
 } from 'react-native-paper';
 import mainContext from '../context/mainContext';
 import {styles} from '../styles/styles';
@@ -161,6 +161,18 @@ function HomeScreen({visible}) {
     setFormWish({title: e.title, description: e.description, link: e.link});
     setOpenModalNewWish(true);
   };
+
+  const shareDashboard = async () => {
+    const link = `nidit://dashboard/${userID}`; // Enlace con ID del tablero
+    try {
+      await Share.share({
+        message: `¡Mira mi tablero de deseos! ${link}`,
+      });
+    } catch (error) {
+      Alert.alert('Error al compartir', error.message);
+    }
+  };
+
   const isEmpty = wishList === undefined || wishList?.length === 0;
 
   return (
@@ -178,6 +190,9 @@ function HomeScreen({visible}) {
             <NoItems />
           ) : (
             <>
+              <Button icon="share-variant" onPress={shareDashboard}>
+                Compartir deseos
+              </Button>
               {wishList?.map(e => {
                 return (
                   <RowCard

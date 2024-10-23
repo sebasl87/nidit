@@ -1,24 +1,29 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Image, Text, View, ScrollView, Platform} from 'react-native';
-
 import {
   LoginWithUser,
   DividerWithText,
   SocialMediaButton,
   Settings,
 } from '../components';
-
 import {styles} from '../styles/styles';
-
 import mainContext from '../context/mainContext';
-
 import {useTranslation} from 'react-i18next';
+import { useRoute } from '@react-navigation/native';
 
 function LoginScreen({navigation}) {
   const {handleALogin, handleGLogin, handleLogin} = useContext(mainContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {t} = useTranslation();
+  const route = useRoute();
+
+  useEffect(() => {
+    const dashboardId = route.params?.dashboardId;
+    if (dashboardId) {
+      navigation.replace('Dashboard', { dashboardId });
+    }
+  }, [route]);
 
   const notDisabled = email.length > 0 && password.length > 0;
   return (
