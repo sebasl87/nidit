@@ -34,6 +34,7 @@ export default function App() {
   const [userProfile, setUserProfile] = useState(null);
   const [initializing, setInitializing] = useState(true);
   const [isDeepLink, setIsDeepLink] = useState(false);
+  const [userID, setUserID] = useState(null);
 
   function onAuthStateChanged(user) {
     setUserProfile(user);
@@ -68,6 +69,8 @@ export default function App() {
     () => ({
       userProfile: {userProfile},
       signOutUser: () => doLogout(),
+      userID: {userID},
+      setUserID: value => setUserID(value),
       handleLogin: (email, password) => {
         doLogin(email, password);
       },
@@ -80,7 +83,7 @@ export default function App() {
       handleGLogin: () => googleLogin(),
       handleALogin: () => appleLogin(),
     }),
-    [userProfile],
+    [userProfile, userID],
   );
 
   const navTheme = DefaultTheme;
