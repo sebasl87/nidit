@@ -1,7 +1,9 @@
 module.exports = {
-  project: {
-    ios: {
-      sourceDir: './ios',
+  dependencies: {
+    boost: {
+      platforms: {
+        ios: null,
+      },
     },
   },
 };

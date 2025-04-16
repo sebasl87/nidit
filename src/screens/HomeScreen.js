@@ -12,49 +12,35 @@ import {
 import mainContext from '../context/mainContext';
 import {styles} from '../styles/styles';
 import auth from '@react-native-firebase/auth';
-import {useMutation, useQuery, useSubscription} from '@apollo/client';
-import {GET_USER_ID} from '../services/apollo/querys/user';
-import {NEW_USER_ID} from '../services/apollo/mutations/user';
-import {
-  DONE_WISH,
-  EDIT_WISH,
-  NEW_WISH,
-  REMOVE_WISH,
-} from '../services/apollo/mutations/wish';
-import {SUBSCRIPTION_WISHLIST_WITH_ID} from '../services/apollo/querys/wish';
-import Toast from 'react-native-toast-message';
+
 import {useTranslation} from 'react-i18next';
+import {useWishes} from '../services/hooks/useWishes';
+import Toast from "react-native-toast-message";
 
 function HomeScreen({visible}) {
   const {t} = useTranslation();
 
-  const {
-    signOutUser,
-    setUserID,
-    userID: {userID},
-  } = useContext(mainContext);
+  const {signOutUser} = useContext(mainContext);
 
   const [isExtended, setIsExtended] = useState(true);
   const [iDEditing, setIDEditing] = useState(null);
-  const [firstTime, setFirstTime] = useState(true);
-  const [wishList, setWishList] = useState(null);
+
   const [openModalNewWish, setOpenModalNewWish] = useState(false);
   const [formWish, setFormWish] = useState();
+
+  const {data: wishes = [], isLoading, isError} = useWishes();
+  const {
+    addWish,
+    removeWish,
+    checkWish: checkWishMutation,
+    editWish,
+  } = useWishMutations();
+
+  const isEmpty = wishes.length === 0;
 
   const handleChangeValue = (key, value) => {
     setFormWish({...formWish, [key]: value});
   };
-
-  const [addUser, {data: dataNewUser, error: errorNewUser}] =
-    useMutation(NEW_USER_ID);
-
-  const [addWish, {data: dataNewWish, error: errorNewWish}] =
-    useMutation(NEW_WISH);
-
-  const [editWish, {error: errorEditWish}] = useMutation(EDIT_WISH);
-
-  const [removeWish, {error: errorRemoveWish}] = useMutation(REMOVE_WISH);
-  const [doneWish, {error: errorDoneWish}] = useMutation(DONE_WISH);
 
   const onScroll = ({nativeEvent}) => {
     const currentScrollPosition =
@@ -63,97 +49,29 @@ function HomeScreen({visible}) {
     setIsExtended(currentScrollPosition <= 0);
   };
 
-  const uid = auth().currentUser.uid;
-
-  const {data: dataUserID} = useQuery(GET_USER_ID, {
-    variables: {user_UID: uid},
-  });
-
-  const {data: dataWishList, loading} = useSubscription(
-    SUBSCRIPTION_WISHLIST_WITH_ID,
-    {
-      variables: {id: userID},
-    },
-  );
-
-  useEffect(() => {
-    dataWishList && setWishList(dataWishList?.getWishlistUsers?.wishlist);
-  }, [dataWishList]);
-
-  useEffect(() => {
-    dataNewWish &&
-      setWishList(dataNewWish?.updateWishlistUsers.wishlistUsers[0].wishlist);
-  }, [dataNewWish]);
-
-  useEffect(() => {
-    dataNewUser &&
-      setUserID(dataNewUser?.addWishlistUsers.wishlistUsers[0]?.id);
-  }, [dataNewUser]);
-
-  useEffect(() => {
-    dataUserID && dataUserID.queryWishlistUsers.length === 0 && firstTime
-      ? addUser({variables: {user_UID: uid}}).then(() => setFirstTime(false))
-      : setUserID(dataUserID?.queryWishlistUsers[0]?.id);
-  }, [dataUserID]);
-
-  useEffect(() => {
-    (errorNewUser ||
-      errorNewWish ||
-      errorEditWish ||
-      errorRemoveWish ||
-      errorDoneWish) &&
-      Toast.show({
-        type: 'error',
-        text1: '❌ Error',
-        text2:
-          errorNewUser |
-          errorNewWish |
-          errorEditWish |
-          errorRemoveWish |
-          errorDoneWish,
-      });
-  }, [
-    errorNewUser,
-    errorNewWish,
-    errorEditWish,
-    errorRemoveWish,
-    errorDoneWish,
-  ]);
-
   const sendWish = async () => {
-    iDEditing
-      ? await editWish({
-          variables: {
-            id: iDEditing,
-            title: formWish?.title,
-            description: formWish?.description,
-            link: formWish?.link,
-          },
-        }).then(() => {
-          setOpenModalNewWish(false), setIDEditing(null);
-        })
-      : await addWish({
-          variables: {
-            id: userID,
-            title: formWish?.title,
-            description: formWish?.description,
-            link: formWish?.link,
-          },
-        }).then(() => {
-          setOpenModalNewWish(false), setIDEditing(null);
-        });
+    if (iDEditing) {
+      await editWish.mutateAsync({
+        wishId: iDEditing,
+        title: formWish?.title,
+        description: formWish?.description,
+        link: formWish?.link,
+      });
+    } else {
+      await addWish.mutateAsync(formWish);
+    }
+
+    setOpenModalNewWish(false);
+    setIDEditing(null);
+    setFormWish({});
   };
 
   const deleteWish = async wishId => {
-    await removeWish({
-      variables: {id: wishId},
-    });
+    await removeWish.mutateAsync(wishId);
   };
 
-  const checkWish = async (wishId, disabledId) => {
-    await doneWish({
-      variables: {id: wishId, done: disabledId},
-    });
+  const checkWish = async wishId => {
+    await checkWishMutation.mutateAsync({wishId, done: true});
   };
 
   const openModalToEditWish = e => {
@@ -161,7 +79,26 @@ function HomeScreen({visible}) {
     setFormWish({title: e.title, description: e.description, link: e.link});
     setOpenModalNewWish(true);
   };
-  const isEmpty = wishList === undefined || wishList?.length === 0;
+
+  useEffect(() => {
+    if (
+      addWish.isError ||
+      editWish.isError ||
+      removeWish.isError ||
+      checkWishMutation.isError
+    ) {
+      Toast.show({
+        type: 'error',
+        text1: 'Oops 😢',
+        text2: 'Hubo un error al guardar los datos.',
+      });
+    }
+  }, [
+    addWish.isError,
+    editWish.isError,
+    removeWish.isError,
+    checkWishMutation.isError,
+  ]);
 
   return (
     <>
@@ -173,12 +110,12 @@ function HomeScreen({visible}) {
             paddingBottom: 84,
             flex: 1,
           }}>
-          {loading && <ActivityIndicator />}
+          {isLoading && <ActivityIndicator />}
           {isEmpty ? (
             <NoItems />
           ) : (
             <>
-              {wishList?.map(e => {
+              {wishes?.map(e => {
                 return (
                   <RowCard
                     wishName={e.title}

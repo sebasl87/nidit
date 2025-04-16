@@ -16,9 +16,6 @@ import {LoginScreen, RegisterScreen, ForgotPasswordScreen} from './src/screens';
 
 import theme from './src/customTheme';
 
-import Client from './src/services/apollo/Client';
-import {ApolloProvider} from '@apollo/client';
-
 import {
   doLogin,
   doSignup,
@@ -31,7 +28,9 @@ import {
   // facebookLogin,
   appleLogin,
 } from './src/services/loginSocialMedia';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
+const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -46,6 +45,7 @@ export default function App() {
       setInitializing(false);
     }
   }
+
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
@@ -77,11 +77,11 @@ export default function App() {
   navTheme.colors.background = '#D1EFA7';
 
   return (
-    <ApolloProvider client={Client}>
+    <QueryClientProvider client={queryClient}>
       <mainContext.Provider value={mainC}>
         <NavigationContainer theme={navTheme}>
           <PaperProvider theme={theme}>
-            <View style={{height: 28, backgroundColor:"#D1EFA7"}}>
+            <View style={{height: 28, backgroundColor: '#D1EFA7'}}>
               <StatusBar translucent backgroundColor="#000" />
             </View>
             <Stack.Navigator
@@ -117,6 +117,6 @@ export default function App() {
           </PaperProvider>
         </NavigationContainer>
       </mainContext.Provider>
-    </ApolloProvider>
+    </QueryClientProvider>
   );
 }
