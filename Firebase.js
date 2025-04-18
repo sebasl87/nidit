@@ -1,4 +1,7 @@
 import {initializeApp} from 'firebase/app';
+import {getFirestore} from 'firebase/firestore';
+import {getAuth} from 'firebase/auth';
+
 import {
   REACT_APP_APIKEY,
   REACT_APP_AUTHDOMAIN,
@@ -16,6 +19,9 @@ const firebaseConfig = {
   messagingSenderId: REACT_APP_MESSAGINGSENDERID,
   appId: REACT_APP_APPID,
 };
-const Firebase = initializeApp(firebaseConfig);
 
-export default Firebase;
+const Firebase = initializeApp(firebaseConfig);
+const db = getFirestore(Firebase);
+const auth = getAuth(Firebase);
+
+export {db, auth};
